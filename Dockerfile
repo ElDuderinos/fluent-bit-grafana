@@ -1,5 +1,5 @@
 # https://github.com/fluent/fluent-bit/issues/1499
-FROM fluent/fluent-bit:1.8.2 as fluent-bit
+FROM fluent/fluent-bit:latest as fluent-bit
 
 FROM ubuntu:focal as lua-libs
 
