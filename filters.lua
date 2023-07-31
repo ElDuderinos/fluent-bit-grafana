@@ -12,7 +12,6 @@ local function get_metadata(container_id)
     local config_file_path = containerz .. "/" .. container_id .. "/config.v2.json"
     local config_file = io.open(config_file_path, "rb")
     if not config_file then
-        io.write(string.format("no config file for %s\n",container_id))
         return nil
     end
     local config_json = config_file:read("*a")
@@ -20,7 +19,6 @@ local function get_metadata(container_id)
 
     -- Map json config
     local config = cjson.decode(config_json)
-    io.write(string.format("container %s name %s\n",container_id, name))
     return {
         id = config.ID,
         name = config.Name:gsub("^/", ""),
@@ -34,7 +32,6 @@ end
 function enrich(tag, timestamp, record)
     -- Get container id from tag
     local container_id = tag:match("docker%.(.+)")
-    io.write(string.format("enrich %s container id\n",tag,container_id))
 
     if not container_id then
         return 0, timestamp, record
