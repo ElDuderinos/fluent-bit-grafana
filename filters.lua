@@ -5,12 +5,11 @@
 cjson = require("cjson")
 
 cache = {}
+containerz = os.getenv("CONTAINERS_PATH")
 
 local function get_metadata(container_id)
     -- Read config file
-    local containerz = os.getenv("CONTAINERS_PATH")
-
-    local config_file_path = CONTAINERS_PATH .. "/" .. container_id .. "/config.v2.json"
+    local config_file_path = containerz .. "/" .. container_id .. "/config.v2.json"
     local config_file = io.open(config_file_path, "rb")
     if not config_file then
         io.write(string.format("no config file for %s\n",container_id))
